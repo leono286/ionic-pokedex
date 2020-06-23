@@ -3,8 +3,8 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import * as pokemonActions from './pokemon.actions'
 import { PokemonDetails } from "./../../models/pokemon";
-import { mergeMap, map, catchError } from 'rxjs/operators';
-import { of, Observable } from 'rxjs';
+import { mergeMap, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
 
 @Injectable()
@@ -20,7 +20,6 @@ export class PokemonEffects {
     ofType(pokemonActions.PokemonActionTypes.LoadPokemons),
     mergeMap(() => this.pokeApiService.getPokemons().pipe(
       map((pokemonList: PokemonDetails[]) => new pokemonActions.LoadPokemonsSuccess(pokemonList)),
-      // catchError(err => of(new productActions.LoadFail(err)))
       )
     )
   );
