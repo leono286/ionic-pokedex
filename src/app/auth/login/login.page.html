@@ -1,0 +1,55 @@
+<ion-content>
+  <div class="content-wrapper">
+    <div class="content">
+      <br>
+      <ion-toolbar class="form-selector">
+        <ion-segment mode="ios" (ionChange)="segmentChanged($event)"
+          [value]="loginFormActive ? LOGIN_STRING : REGISTER_STRING" color="light">
+          <ion-segment-button [value]="LOGIN_STRING">
+            <ion-label>Login</ion-label>
+          </ion-segment-button>
+          <ion-segment-button [value]="REGISTER_STRING">
+            <ion-label>Register</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-toolbar>
+      <br>
+      <form *ngIf="form" [formGroup]="form" (submit)="formSubmit()">
+        <ion-list lines="none">
+  
+          <ion-item color="dark" lines="none" *ngIf="form.contains('firstname')">
+            <ion-label position="stacked">First name <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input type="text" formControlName="firstname"></ion-input>
+            <ion-text *ngIf="showFirstnameError" color="danger">Please provide your firstname</ion-text>
+          </ion-item>
+  
+          <ion-item color="dark" lines="none" *ngIf="form.contains('lastname')">
+            <ion-label position="stacked">Last name <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input type="text" formControlName="lastname"></ion-input>
+            <ion-text *ngIf="showLastnameError" color="danger">Please provide your lastname</ion-text>
+          </ion-item>
+  
+          <ion-item color="dark" lines="none">
+            <ion-label position="stacked">Email <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input type="email" formControlName="email"></ion-input>
+            <ion-text *ngIf="showEmailError()['required']" color="danger">Please enter your email</ion-text>
+            <ion-text *ngIf="showEmailError()['email']" color="danger">Please enter a valid email</ion-text>
+          </ion-item>
+  
+          <ion-item color="dark" lines="none">
+            <ion-label position="stacked">Password <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input type="password" formControlName="password"></ion-input>
+            <ion-text *ngIf="showPasswordError" color="danger">Please enter your password</ion-text>
+          </ion-item>
+        </ion-list>
+        <ion-button mode="ios" type="submit" [disabled]="!form.valid" class="ion-no-margin" color="light">
+          {{loginFormActive ? LOGIN_STRING : REGISTER_STRING}}</ion-button>
+      </form>
+    </div>
+  </div>
+  <img *ngIf="showLogo" class="logo" src="../../../assets/img/logo.webp" alt="logo">
+</ion-content>

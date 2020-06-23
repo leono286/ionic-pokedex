@@ -1,0 +1,32 @@
+<ion-content>
+  <div class="imageWraper">
+    <ion-icon name="close" (click)="dismiss()"></ion-icon>
+    <img [src]="pokemonData.sprites.front_default" alt="front">
+    <img [src]="pokemonData.sprites.back_default" alt="back">
+  </div>
+  <div class="pokemonData">
+    <h5 class="pokemonId">#{{pokemonData.id}}</h5>
+    <h2 class="pokemonName">{{pokemonData.name}}</h2>
+    <div class="typesWrapper">
+      <span class="type" *ngFor="let type of pokemonTypes">{{type}}</span>
+    </div>
+    <div class="detailsWrapper">
+      <div class="detailsItemBox"><strong>Height: </strong> <span>{{pokemonData.height}}</span></div>
+      <div class="detailsItemBox"><strong>Weight: </strong> <span>{{pokemonData.weight}}</span></div>
+      <div class="detailsItemBox"><strong>Stats: </strong>
+        <ul class="stats">
+          <li *ngFor="let stat of pokemonData.stats">
+            <span>{{stat.stat.name}}</span> <span class="dots"></span> <span>{{stat.base_stat}}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="detailsItemBox"><strong>Moves: </strong>
+        <div class="moves">
+          <span *ngFor="let move of pokemonData.moves">
+            <ion-label>{{move.move.name}}</ion-label>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

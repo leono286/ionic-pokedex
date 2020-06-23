@@ -1,0 +1,11 @@
+<ion-card *ngIf="pokemonData" (click)="emitOpenDetails()">
+  <ion-card-header>
+    <img [src]="pokemonData.sprites.front_default" [alt]="pokemonData.name">
+  </ion-card-header>
+  <ion-card-content>
+    <ion-card-title>{{pokemonData.name}}</ion-card-title>
+    <ion-card-subtitle>
+      <span *ngFor="let type of pokemonTypes">{{type}}</span>
+    </ion-card-subtitle>
+  </ion-card-content>
+</ion-card>

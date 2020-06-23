@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
+    <ng-container *ngIf="pokemonsList.length">
+      <ion-button slot="start" fill="clear" color="light" (click)="togglePokemonSearchBar()" *ngIf="!showPokemonSearchBar; else closeTemplate">
+        <ion-icon  slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+      <ng-template #closeTemplate>
+        <ion-button slot="start" fill="clear" color="light" (click)="togglePokemonSearchBar()">
+          <ion-icon slot="icon-only" name="close"></ion-icon>
+        </ion-button>
+      </ng-template>
+    </ng-container>
+    <ion-title>
+      Pokedex
+    </ion-title>
+    <ion-button slot="end" fill="clear" color="light" (click)="logout()">
+      <ion-icon slot="icon-only" name="exit"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+  <ion-toolbar class="search-bar" slot="fixed" *ngIf="pokemonsList.length && showPokemonSearchBar" color="dark">
+    <ion-searchbar animated placeholder="Filter pokemons" debounce="200" showCancelButton="never" searchIcon="undefined" inputmode="search"
+      (ionChange)="onSearchChange($event)" (ionClear)="onSearchClear($event)" (keyup.enter)="enterKeyPressed()"></ion-searchbar>
+  </ion-toolbar>
+
+  <div id="container" [class.search-bar-visible]="showPokemonSearchBar">
+    <div class="loading-image" *ngIf="!pokemonsList.length; else pokemonListTemplate">
+      <img src="./../../assets/img/pokeball.gif" alt="Loading animation">
+    </div>
+
+    <ng-template #pokemonListTemplate>
+      <app-pokemon-card *ngFor="let pokemonData of pokemonsToShow" [pokemonData]="pokemonData"
+        (openDetails)="openDetails($event, pokemonData)"></app-pokemon-card>
+    </ng-template>
+  </div>
+
+
+  <ion-infinite-scroll #infiteScroll threshold="30px" (ionInfinite)="loadData($event)" [disabled]="showPokemonSearchBar">
+    <ion-infinite-scroll-content loadingSpinner="null" loadingText="&lt;img class=&quot;scroll-loading-img&quot; src=&quot;./../../assets/img/pokeball-rolling.gif&quot; alt=&quot;loading animation&quot;&gt;
+    &lt;h5&gt;Loading more data...&lt;/h5&gt;"></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

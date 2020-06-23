@@ -1,0 +1,54 @@
+:host {
+  width: 165px;
+  max-width: 250px;
+  margin: 0;
+  flex-grow: 1;
+  --lightVibrant: transparent;
+  --darkMuted: transparent;
+}
+
+ion-card {
+  margin: 0;
+  font-family: 'Share Tech Mono', monospace;
+  padding: 0;
+  border-radius: 0;
+
+  ion-card-header,
+  ion-card-content {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+
+
+  ion-card-header {
+    background-color: var(--lightVibrant);
+    padding: 25px 10px 10px;
+  }
+
+  ion-card-content {
+    background-color: var(--darkMuted);
+
+    ion-card-subtitle {
+      padding: 15px 10px;
+      margin: 0;
+    }
+  }
+
+  ion-card-title {
+    font-size: 22px;
+    padding: 15px 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #FFF;
+  }
+
+  ion-card-subtitle {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px 6px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #FFF;
+  }
+}
