@@ -29,6 +29,7 @@
     "@ngrx/effects": "^9.2.0",
     "@ngrx/store": "^9.2.0",
     "@ngrx/store-devtools": "^9.2.0",
+    "cordova-plugin-navigationbar-color": "0.0.9",
     "node-vibrant": "^3.1.5",
     "rxjs": "~6.5.1",
     "tslib": "^1.10.0",

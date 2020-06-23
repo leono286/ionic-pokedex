@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { Platform } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Plugins } from '@capacitor/core';
@@ -27,5 +26,12 @@ export class AppComponent {
         SplashScreen.hide();
       }, 900);
     });
+
+    if (this.platform.is('android') && window.hasOwnProperty('NavigationBar')) {
+      const navigationBarColor = '#000000';
+      const ligthNavigationBar = true;
+      window['NavigationBar'].backgroundColorByHexString(navigationBarColor, ligthNavigationBar);
+    }
+
   }
 }

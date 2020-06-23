@@ -35,6 +35,23 @@ ion-content {
   }
 }
 
+
+.secure-password-toggle {
+  margin: 0 8px;
+  padding: 5px 0;
+  --background: transparent;
+  --inner-padding-bottom: 0px;
+  --inner-border-width: 0px;
+}
+
+.pattern-description {
+  margin: 0 0 6px;
+  font-size: 0.88em;
+  box-sizing: border-box;
+  padding: 0 20px;
+  display: block;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -55,6 +72,7 @@ form {
 
   ion-button {
     margin-top: 20px;
+    margin-bottom: 30px;
     text-transform: capitalize;
     align-self: center;
   }

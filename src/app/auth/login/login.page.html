@@ -14,23 +14,33 @@
         </ion-segment>
       </ion-toolbar>
       <br>
+      <ng-container *ngIf="!loginFormActive">
+        <ion-item class="secure-password-toggle">
+          <ion-checkbox color="medium" [(ngModel)]="useUltraSecurePassword" (ionChange)="setPasswordValidators($event)"></ion-checkbox>&nbsp;
+          <ion-label color="medium">Use ultra secure password pattern</ion-label>
+        </ion-item>
+        <ion-label class="pattern-description" color="medium" *ngIf="useUltraSecurePassword">
+          Password fields must have: minimum 8 characters length, 2 uppercase letters, 1 numeric character, 1 especial character.
+        </ion-label>
+      </ng-container>
+
       <form *ngIf="form" [formGroup]="form" (submit)="formSubmit()">
         <ion-list lines="none">
-  
-          <ion-item color="dark" lines="none" *ngIf="form.contains('firstname')">
+
+          <ion-item color="dark" lines="none" *ngIf="form.contains(FORM_CONTROL_NAMES.firstname)">
             <ion-label position="stacked">First name <ion-text color="danger">*</ion-text>
             </ion-label>
             <ion-input type="text" formControlName="firstname"></ion-input>
             <ion-text *ngIf="showFirstnameError" color="danger">Please provide your firstname</ion-text>
           </ion-item>
-  
-          <ion-item color="dark" lines="none" *ngIf="form.contains('lastname')">
+
+          <ion-item color="dark" lines="none" *ngIf="form.contains(FORM_CONTROL_NAMES.lastname)">
             <ion-label position="stacked">Last name <ion-text color="danger">*</ion-text>
             </ion-label>
             <ion-input type="text" formControlName="lastname"></ion-input>
             <ion-text *ngIf="showLastnameError" color="danger">Please provide your lastname</ion-text>
           </ion-item>
-  
+
           <ion-item color="dark" lines="none">
             <ion-label position="stacked">Email <ion-text color="danger">*</ion-text>
             </ion-label>
@@ -38,12 +48,24 @@
             <ion-text *ngIf="showEmailError()['required']" color="danger">Please enter your email</ion-text>
             <ion-text *ngIf="showEmailError()['email']" color="danger">Please enter a valid email</ion-text>
           </ion-item>
-  
+
           <ion-item color="dark" lines="none">
             <ion-label position="stacked">Password <ion-text color="danger">*</ion-text>
             </ion-label>
             <ion-input type="password" formControlName="password"></ion-input>
             <ion-text *ngIf="showPasswordError" color="danger">Please enter your password</ion-text>
+            <ion-text *ngIf="showPasswordPatternError" color="danger">Must match ultra secure pattern</ion-text>
+            <ion-text *ngIf="!loginFormActive && showMissmatchedPasswordsError" color="danger">Passwords don't match
+            </ion-text>
+          </ion-item>
+          
+          <ion-item color="dark" lines="none" *ngIf="form.contains(FORM_CONTROL_NAMES.confirmPassword)">
+            <ion-label position="stacked">Confirm password <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input type="password" formControlName="confirmPassword"></ion-input>
+            <ion-text *ngIf="showConfirmPasswordError" color="danger">Please confirm your password</ion-text>
+            <ion-text *ngIf="showConfirmPasswordPatternError" color="danger">Must match ultra secure pattern</ion-text>
+            <ion-text *ngIf="showMissmatchedPasswordsError" color="danger">Passwords don't match</ion-text>
           </ion-item>
         </ion-list>
         <ion-button mode="ios" type="submit" [disabled]="!form.valid" class="ion-no-margin" color="light">
