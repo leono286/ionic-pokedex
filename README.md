@@ -1,6 +1,6 @@
 # ionic-pokedex
 
-Pokedex App created with Ionic 5.
+Pokedex App created with Angular ~9 and Ionic ~5.
 
 #### Download APK
 
